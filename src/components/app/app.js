@@ -28,6 +28,7 @@ export default class App extends React.Component {
       description,
       id: Math.random() * 10000,
       done: false,
+      date: new Date(),
     };
   }
 
@@ -79,7 +80,7 @@ export default class App extends React.Component {
   render() {
     const { dataTask, filter } = this.state;
     const doneCount = dataTask.filter((el) => !el.done).length;
-    const showItems = this.onShowTask()
+    const showItems = this.onShowTask();
 
     return (
       <section className="todoapp">
@@ -97,7 +98,7 @@ export default class App extends React.Component {
             doneCount={doneCount}
             onClearTask={this.deletCompletedTask}
             filter={filter}
-            onFilter = {this.onFilter}
+            onFilter={this.onFilter}
           />
         </section>
       </section>
