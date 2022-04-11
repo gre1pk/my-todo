@@ -32,14 +32,14 @@ export default class App extends React.Component {
     };
   }
 
-  deletTask = (id) => {
+  deleteTask = (id) => {
     this.setState(({ dataTask }) => {
       const newDataTask = dataTask.filter((el) => el.id !== id);
       return { dataTask: newDataTask };
     });
   };
 
-  deletCompletedTask = () => {
+  onClearTask = () => {
     this.setState(({ dataTask }) => {
       const newArr = dataTask.filter((e) => !e.done);
       return { dataTask: newArr };
@@ -86,17 +86,17 @@ export default class App extends React.Component {
       <section className="todoapp">
         <header className="header">
           <Title />
-          <NewTaskForm addNewTask={this.createNewTask} />
+          <NewTaskForm onNewTask={this.createNewTask} />
         </header>
         <section className="main">
           <TaskList
             todos={showItems}
-            onDeleted={this.deletTask}
+            onDeleted={this.deleteTask}
             onToggleDone={this.onToggleDone}
           />
           <Footer
             doneCount={doneCount}
-            onClearTask={this.deletCompletedTask}
+            onClearTask={this.onClearTask}
             filter={filter}
             onFilter={this.onFilter}
           />

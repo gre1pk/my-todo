@@ -1,5 +1,6 @@
 import React from 'react';
 import './new-task-form.css';
+import PropTypes from 'prop-types';
 
 export default class NewTaskForm extends React.Component {
   state = {
@@ -14,10 +15,14 @@ export default class NewTaskForm extends React.Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    this.props.addNewTask(this.state.label);
+    this.props.onNewTask(this.state.label);
     this.setState({
       label: '',
     });
+  };
+
+  static propTypes = {
+    onNewTask: PropTypes.func.isRequired,
   };
   render() {
     return (

@@ -15,7 +15,7 @@ class TaskFilter extends React.Component {
   ];
 
   render() {
-    const { filter , onChange } = this.props;
+    const { filter, onChange } = this.props;
 
     const buttons = this.filtersBtn.map((el) => {
       const isActive = filter === el.name;
