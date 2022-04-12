@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import PropTypes from 'prop-types';
 import './task-item.css';
 
@@ -18,8 +18,10 @@ const TaskItem = ({
     <li className={classNames}>
       <div className="view"></div>
       <input type="checkbox" className="toggle" />
-      <label onClick={onToggleDone}>
-        <span className="description">{description}</span>
+      <label>
+        <button className="description"  onClick={onToggleDone} onKeyDown={onToggleDone}>
+          {description}
+        </button>
         <span className="created"> {taskCreate} </span>
       </label>
       <button className="icon icon-edit"></button>

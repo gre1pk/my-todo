@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './task-filter.css';
 
 class TaskFilter extends React.Component {
@@ -13,7 +14,10 @@ class TaskFilter extends React.Component {
       name: 'Completed',
     },
   ];
-
+  static propTypes = {
+    filter: PropTypes.string,
+    onChange: PropTypes.func,
+  };
   render() {
     const { filter, onChange } = this.props;
 
