@@ -1,40 +1,43 @@
-import React from 'react';
-import './task-filter.css';
+import './task-filter.css'
+import React, { Component } from 'react'
 
-class TaskFilter extends React.Component {
-  filtersBtn = [
-    {
-      name: 'All',
-    },
-    {
-      name: 'Active',
-    },
-    {
-      name: 'Completed',
-    },
-  ];
+class TaskFilter extends Component {
+  constructor() {
+    super()
+    this.filtersBtn = [
+      {
+        name: 'All',
+      },
+      {
+        name: 'Active',
+      },
+      {
+        name: 'Completed',
+      },
+    ]
+  }
 
   render() {
-    const { filter, onChange } = this.props;
+    const { filter, onChange } = this.props
 
     const buttons = this.filtersBtn.map((el) => {
-      const isActive = filter === el.name;
-      const classItem = isActive ? 'selected' : '';
+      const isActive = filter === el.name
+      const classItem = isActive ? 'selected' : ''
       return (
         <li key={el.name}>
           <button
             className={classItem}
             onClick={() => {
-              onChange(el.name);
+              onChange(el.name)
             }}
           >
             {el.name}
           </button>
         </li>
-      );
-    });
-    return <ul className="filters">{buttons}</ul>;
+      )
+    })
+    return <ul className="filters">{buttons}</ul>
   }
 }
 
-export default TaskFilter;
+export default TaskFilter

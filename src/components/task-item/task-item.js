@@ -1,17 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import './task-item.css';
+import React from 'react'
+import PropTypes from 'prop-types'
+import './task-item.css'
 
-const TaskItem = ({
-  description,
-  onDeleted,
-  onToggleDone,
-  done,
-  taskCreate,
-}) => {
-  let classNames;
+const TaskItem = ({ description, onDeleted, onToggleDone, done, taskCreate }) => {
+  let classNames
   if (done) {
-    classNames = 'completed';
+    classNames = 'completed'
   }
 
   return (
@@ -25,8 +19,8 @@ const TaskItem = ({
       <button className="icon icon-edit"></button>
       <button className="icon icon-destroy" onClick={onDeleted}></button>
     </li>
-  );
-};
+  )
+}
 
 TaskItem.defaultProps = {
   description: 'Не задано',
@@ -34,7 +28,7 @@ TaskItem.defaultProps = {
   onToggleDone: () => {},
   onDeleted: () => {},
   taskCreate: new Date(),
-};
+}
 
 TaskItem.propTypes = {
   done: PropTypes.bool,
@@ -42,6 +36,6 @@ TaskItem.propTypes = {
   onDeleted: PropTypes.func,
   onToggleDone: PropTypes.func,
   taskCreate: PropTypes.string,
-};
+}
 
-export default TaskItem;
+export default TaskItem
