@@ -1,10 +1,9 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './components/app';
 
-import App from './components/app'
+const container = document.querySelector('.todoapp');
 
-const container = document.querySelector('.todoapp')
+const root = ReactDOM.createRoot(container);
 
-const root = ReactDOM.createRoot(container)
-
-root.render(<App />)
+root.render(<App />);
