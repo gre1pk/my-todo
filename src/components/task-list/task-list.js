@@ -1,32 +1,32 @@
-// import React from 'react';
-import PropTypes from 'prop-types';
-import { formatDistanceToNow } from 'date-fns';
-import './task-list.css';
-import TaskItem from '../task-item';
+import PropTypes from 'prop-types'
+import { formatDistanceToNow } from 'date-fns'
 
-const TaskList = ({ todos, onDeleted, onToggleDone }) => {
+import './task-list.css'
+import TaskItem from '../task-item'
+
+function TaskList({ todos, onDeleted, onToggleDone }) {
   const elements = todos.map((el) => {
-    const { id, ...itemsProp } = el;
-
-    const timeAfterCreate = formatDistanceToNow(new Date(el.date));
+    const { id, description, done } = el
+    const taskCreate = formatDistanceToNow(new Date(el.date))
 
     return (
       <TaskItem
-        {...itemsProp}
+        description={description}
+        done={done}
         key={id}
         onDeleted={() => onDeleted(id)}
         onToggleDone={() => onToggleDone(id)}
-        taskCreate={timeAfterCreate}
+        taskCreate={taskCreate}
       />
-    );
-  });
-  return <ul className="todo-list">{elements}</ul>;
-};
+    )
+  })
+  return <ul className="todo-list">{elements}</ul>
+}
 
 TaskList.defaultProps = {
   onDeleted: () => {},
   onToggleDone: () => {},
-};
+}
 
 TaskList.propTypes = {
   todos: PropTypes.arrayOf(
@@ -34,10 +34,10 @@ TaskList.propTypes = {
       description: PropTypes.string,
       id: PropTypes.number,
       done: PropTypes.bool,
-      date: PropTypes.object,
+      // date: PropTypes.object,
     })
   ).isRequired,
   onDeleted: PropTypes.func,
   onToggleDone: PropTypes.func,
-};
-export default TaskList;
+}
+export default TaskList

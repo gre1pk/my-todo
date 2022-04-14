@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import './task-filter.css';
+import React from 'react'
+import PropTypes from 'prop-types'
+import './task-filter.css'
 
 class TaskFilter extends React.Component {
   filtersBtn = [
@@ -13,32 +13,35 @@ class TaskFilter extends React.Component {
     {
       name: 'Completed',
     },
-  ];
-  static propTypes = {
-    filter: PropTypes.string,
-    onChange: PropTypes.func,
-  };
+  ]
+
   render() {
-    const { filter, onChange } = this.props;
+    const { filter, onChange } = this.props
 
     const buttons = this.filtersBtn.map((el) => {
-      const isActive = filter === el.name;
-      const classItem = isActive ? 'selected' : '';
+      const isActive = filter === el.name
+      const classItem = isActive ? 'selected' : ''
       return (
         <li key={el.name}>
           <button
             className={classItem}
+            type="button"
             onClick={() => {
-              onChange(el.name);
+              onChange(el.name)
             }}
           >
             {el.name}
           </button>
         </li>
-      );
-    });
-    return <ul className="filters">{buttons}</ul>;
+      )
+    })
+    return <ul className="filters">{buttons}</ul>
   }
 }
 
-export default TaskFilter;
+TaskFilter.propTypes = {
+  filter: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+}
+
+export default TaskFilter

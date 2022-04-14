@@ -1,34 +1,27 @@
-// import React from 'react';
-import PropTypes from 'prop-types';
-import './task-item.css';
+import PropTypes from 'prop-types'
+import './task-item.css'
 
-const TaskItem = ({
-  description,
-  onDeleted,
-  onToggleDone,
-  done,
-  taskCreate,
-}) => {
-  let classNames;
+function TaskItem({ description, onDeleted, onToggleDone, done, taskCreate }) {
+  let classNames
   if (done) {
-    classNames = 'completed';
+    classNames = 'completed'
   }
 
   return (
     <li className={classNames}>
-      <div className="view"></div>
+      <div className="view" />
       <input type="checkbox" className="toggle" />
-      <label>
-        <button className="description"  onClick={onToggleDone} onKeyDown={onToggleDone}>
+      <label htmlFor="first-name">
+        <button className="description" onClick={onToggleDone} onKeyDown={onToggleDone} type="button">
           {description}
         </button>
         <span className="created"> {taskCreate} </span>
       </label>
-      <button className="icon icon-edit"></button>
-      <button className="icon icon-destroy" onClick={onDeleted}></button>
+      <button className="icon icon-edit" type="button" aria-label="edit element" />
+      <button className="icon icon-destroy" onClick={onDeleted} type="button" aria-label="delete element" />
     </li>
-  );
-};
+  )
+}
 
 TaskItem.defaultProps = {
   description: 'Не задано',
@@ -36,7 +29,7 @@ TaskItem.defaultProps = {
   onToggleDone: () => {},
   onDeleted: () => {},
   taskCreate: new Date(),
-};
+}
 
 TaskItem.propTypes = {
   done: PropTypes.bool,
@@ -44,6 +37,6 @@ TaskItem.propTypes = {
   onDeleted: PropTypes.func,
   onToggleDone: PropTypes.func,
   taskCreate: PropTypes.string,
-};
+}
 
-export default TaskItem;
+export default TaskItem
