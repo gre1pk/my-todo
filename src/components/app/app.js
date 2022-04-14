@@ -7,6 +7,7 @@ import TaskList from '../task-list'
 import Footer from '../Footer'
 
 const createTodoItem = (description) => {
+  console.log()
   const newObj = {
     description,
     id: Math.random() * 10000,
