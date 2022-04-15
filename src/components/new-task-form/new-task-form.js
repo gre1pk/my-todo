@@ -8,11 +8,12 @@ export default class NewTaskForm extends React.Component {
     this.state = {
       label: '',
     }
+    this.regular = /^^\s*$/
   }
 
-  onLabelChange = (e) => {
+  onLabelChange = ({ target }) => {
     this.setState({
-      label: e.target.value,
+      label: target.value,
     })
   }
 
@@ -20,7 +21,8 @@ export default class NewTaskForm extends React.Component {
     const { label } = this.state
     const { onNewTask } = this.props
     e.preventDefault()
-    if (label) {
+    const invalidText = this.regular.test(label)
+    if (!invalidText) {
       onNewTask(label)
       this.setState({
         label: '',

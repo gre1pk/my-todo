@@ -3,6 +3,7 @@ import './task-item.css'
 
 function TaskItem({ description, onDeleted, onToggleDone, done, taskCreate }) {
   let classNames
+
   if (done) {
     classNames = 'completed'
   }
@@ -10,7 +11,7 @@ function TaskItem({ description, onDeleted, onToggleDone, done, taskCreate }) {
   return (
     <li className={classNames}>
       <div className="view" />
-      <input type="checkbox" className="toggle" />
+      <input type="checkbox" className="toggle" onChange={onToggleDone} checked={done} />
       <label htmlFor="first-name">
         <button className="description" onClick={onToggleDone} onKeyDown={onToggleDone} type="button">
           {description}

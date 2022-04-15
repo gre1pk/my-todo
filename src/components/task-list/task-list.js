@@ -34,7 +34,6 @@ TaskList.propTypes = {
       description: PropTypes.string,
       id: PropTypes.number,
       done: PropTypes.bool,
-      // date: PropTypes.object,
     })
   ).isRequired,
   onDeleted: PropTypes.func,
