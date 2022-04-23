@@ -6,12 +6,13 @@ import Title from '../title'
 import TaskList from '../task-list'
 import Footer from '../Footer'
 
-const createTodoItem = (description) => {
+const createTodoItem = (description, timer) => {
   const newObj = {
     description,
     id: Math.random() * 10000,
     done: false,
     date: new Date(),
+    timerСount: timer,
   }
   return newObj
 }
@@ -29,8 +30,8 @@ export default class App extends React.Component {
     }
   }
 
-  createNewTask = (text) => {
-    const newTask = this.createTodoItems(text)
+  createNewTask = (text, timer) => {
+    const newTask = this.createTodoItems(text, timer)
     this.setState(({ dataTask }) => {
       const newArr = [newTask, ...dataTask]
       return { dataTask: newArr }
