@@ -6,7 +6,7 @@ import TaskItem from '../task-item'
 
 function TaskList({ todos, onDeleted, onToggleDone }) {
   const elements = todos.map((el) => {
-    const { id, description, done } = el
+    const { id, description, done, timerСount } = el
     const taskCreate = formatDistanceToNow(new Date(el.date))
 
     return (
@@ -17,6 +17,7 @@ function TaskList({ todos, onDeleted, onToggleDone }) {
         onDeleted={() => onDeleted(id)}
         onToggleDone={() => onToggleDone(id)}
         taskCreate={taskCreate}
+        timerСount={timerСount}
       />
     )
   })
@@ -34,6 +35,7 @@ TaskList.propTypes = {
       description: PropTypes.string,
       id: PropTypes.number,
       done: PropTypes.bool,
+      timerСount: PropTypes.number,
     })
   ).isRequired,
   onDeleted: PropTypes.func,
