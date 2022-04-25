@@ -22,10 +22,12 @@ export default class TaskItem extends React.Component {
   }
 
   onStartTimer = () => {
+    const { timerValue } = this.state
+    const endPoint = Date.now() + timerValue
     const teme = setInterval(() => {
-      this.setState(({ timerValue }) => {
-        const count = timerValue - 1
-        return { timerValue: count }
+      const now = new Date()
+      this.setState({
+        timerValue: (endPoint - now) / 1000 + timerValue,
       })
     }, 1000)
     this.setState({ idTimer: teme, timeActive: true })
@@ -37,8 +39,14 @@ export default class TaskItem extends React.Component {
     this.setState({ timeActive: false })
   }
 
+  handlerDone = () => {
+    const { onToggleDone } = this.props
+    this.onStopTimer()
+    onToggleDone()
+  }
+
   render() {
-    const { description, onDeleted, onToggleDone, done, taskCreate } = this.props
+    const { description, onDeleted, done, taskCreate } = this.props
     const { timerValue, timeActive } = this.state
     const timer = format(timerValue * 1000, 'mm:ss')
     const classNames = done ? 'completed' : ''
@@ -51,9 +59,9 @@ export default class TaskItem extends React.Component {
     return (
       <li className={classNames}>
         <div className="view" />
-        <input type="checkbox" className="toggle" onChange={onToggleDone} checked={done} />
+        <input type="checkbox" className="toggle" onChange={this.handlerDone} checked={done} />
         <label htmlFor="task">
-          <button className="title" onClick={onToggleDone} onKeyDown={onToggleDone} type="button">
+          <button className="title" onClick={this.handlerDone} onKeyDown={this.handlerDone} type="button">
             {description}
           </button>
           <span className="description">
