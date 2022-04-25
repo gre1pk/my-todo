@@ -50,10 +50,17 @@ export default class TaskItem extends React.Component {
     const { timerValue, timeActive } = this.state
     const timer = format(timerValue * 1000, 'mm:ss')
     const classNames = done ? 'completed' : ''
+    const disbldBtn = done ? 'disabled' : false
     const btnTimer = timeActive ? (
       <button className="icon icon-pause" type="button" aria-label="timer stop" onClick={this.onStopTimer} />
     ) : (
-      <button className="icon icon-play" type="button" aria-label="timer start" onClick={this.onStartTimer} />
+      <button
+        className="icon icon-play"
+        type="button"
+        disabled={disbldBtn}
+        aria-label="timer start"
+        onClick={this.onStartTimer}
+      />
     )
 
     return (
