@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import './task-filter.css'
 
-class TaskFilter extends React.Component {
-  filtersBtn = [
+function TaskFilter({ filter, onChange }) {
+  const filtersBtn = [
     {
       name: 'All',
     },
@@ -15,28 +15,24 @@ class TaskFilter extends React.Component {
     },
   ]
 
-  render() {
-    const { filter, onChange } = this.props
-
-    const buttons = this.filtersBtn.map((el) => {
-      const isActive = filter === el.name
-      const classItem = isActive ? 'selected' : ''
-      return (
-        <li key={el.name}>
-          <button
-            className={classItem}
-            type="button"
-            onClick={() => {
-              onChange(el.name)
-            }}
-          >
-            {el.name}
-          </button>
-        </li>
-      )
-    })
-    return <ul className="filters">{buttons}</ul>
-  }
+  const buttons = filtersBtn.map((el) => {
+    const isActive = filter === el.name
+    const classItem = isActive ? 'selected' : ''
+    return (
+      <li key={el.name}>
+        <button
+          className={classItem}
+          type="button"
+          onClick={() => {
+            onChange(el.name)
+          }}
+        >
+          {el.name}
+        </button>
+      </li>
+    )
+  })
+  return <ul className="filters">{buttons}</ul>
 }
 
 TaskFilter.propTypes = {

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import './app.css'
 import NewTaskForm from '../new-task-form'
@@ -16,54 +16,46 @@ const createTodoItem = (description, timer) => {
   }
   return newObj
 }
-export default class App extends React.Component {
-  constructor() {
-    super()
-    this.createTodoItems = createTodoItem.bind(this)
-    this.state = {
-      dataTask: [
-        this.createTodoItems('Completed task'),
-        this.createTodoItems('Editing task'),
-        this.createTodoItems('Active task'),
-      ],
-      filter: 'All',
-    }
-  }
 
-  createNewTask = (text, timer) => {
-    const newTask = this.createTodoItems(text, timer)
-    this.setState(({ dataTask }) => {
-      const newArr = [newTask, ...dataTask]
-      return { dataTask: newArr }
+const taskList = [createTodoItem('Completed task'), createTodoItem('Editing task'), createTodoItem('Active task')]
+
+function App() {
+  const [dataTask, setDataTask] = useState(taskList)
+  const [filter, setFilter] = useState('All')
+
+  const createNewTask = (text, timer) => {
+    const newTask = createTodoItem(text, timer)
+    setDataTask((prevdataTask) => {
+      const newArr = [newTask, ...prevdataTask]
+      return newArr
     })
   }
 
-  deleteTask = (id) => {
-    this.setState(({ dataTask }) => {
-      const newDataTask = dataTask.filter((el) => el.id !== id)
-      return { dataTask: newDataTask }
+  const deleteTask = (id) => {
+    setDataTask((prevdataTask) => {
+      const newDataTask = prevdataTask.filter((el) => el.id !== id)
+      return newDataTask
     })
   }
 
-  onClearTask = () => {
-    this.setState(({ dataTask }) => {
-      const newArr = dataTask.filter((e) => !e.done)
-      return { dataTask: newArr }
+  const onClearTask = () => {
+    setDataTask((prevdataTask) => {
+      const newArr = prevdataTask.filter((e) => !e.done)
+      return newArr
     })
   }
 
-  onToggleDone = (id) => {
-    this.setState(({ dataTask }) => {
-      const idx = dataTask.findIndex((el) => el.id === id)
-      const oldItem = dataTask[idx]
+  const onToggleDone = (id) => {
+    setDataTask((prevdataTask) => {
+      const idx = prevdataTask.findIndex((el) => el.id === id)
+      const oldItem = prevdataTask[idx]
       const newItem = { ...oldItem, done: !oldItem.done }
-      const newArr = [...dataTask.slice(0, idx), newItem, ...dataTask.slice(idx + 1)]
-      return { dataTask: newArr }
+      const newArr = [...prevdataTask.slice(0, idx), newItem, ...prevdataTask.slice(idx + 1)]
+      return newArr
     })
   }
 
-  onShowTask = () => {
-    const { filter, dataTask } = this.state
+  const onShowTask = () => {
     if (filter === 'Active') {
       return dataTask.filter((e) => !e.done)
     }
@@ -73,26 +65,25 @@ export default class App extends React.Component {
     return dataTask
   }
 
-  onFilter = (name) => {
-    this.setState({ filter: name })
+  const onFilter = (name) => {
+    setFilter(name)
   }
 
-  render() {
-    const { dataTask, filter } = this.state
-    const doneCount = dataTask.filter((el) => !el.done).length
-    const showItems = this.onShowTask()
+  const doneCount = dataTask.filter((el) => !el.done).length
+  const showItems = onShowTask()
 
-    return (
-      <section className="todoapp">
-        <header className="header">
-          <Title />
-          <NewTaskForm onNewTask={this.createNewTask} />
-        </header>
-        <section className="main">
-          <TaskList todos={showItems} onDeleted={this.deleteTask} onToggleDone={this.onToggleDone} />
-          <Footer doneCount={doneCount} onClearTask={this.onClearTask} filter={filter} onFilter={this.onFilter} />
-        </section>
+  return (
+    <section className="todoapp">
+      <header className="header">
+        <Title />
+        <NewTaskForm onNewTask={createNewTask} />
+      </header>
+      <section className="main">
+        <TaskList todos={showItems} onDeleted={deleteTask} onToggleDone={onToggleDone} />
+        <Footer doneCount={doneCount} onClearTask={onClearTask} filter={filter} onFilter={onFilter} />
       </section>
-    )
-  }
+    </section>
+  )
 }
+
+export default App
