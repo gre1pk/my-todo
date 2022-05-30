@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { format } from 'date-fns'
 import './task-item.css'
 
-function TaskItem({ done, description, onDeleted, onToggleDone, taskCreate, timerСount }) {
+function TaskItem({ done, description, onDeleted, onToggleDone, taskCreate, timerСount = 0 }) {
   const [timerValue, setTimerValue] = useState(timerСount)
   const [isActive, setIsActive] = useState(false)
 
