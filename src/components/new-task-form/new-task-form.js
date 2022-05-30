@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import './new-task-form.css'
-import PropTypes from 'prop-types'
 
 function NewTaskForm({ onNewTask }) {
   const regular = /^^\s*$/
@@ -68,10 +67,6 @@ function NewTaskForm({ onNewTask }) {
       <button type="submit" aria-label="submit" />
     </form>
   )
-}
-
-NewTaskForm.propTypes = {
-  onNewTask: PropTypes.func.isRequired,
 }
 
 export default NewTaskForm

@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import './task-filter.css'
 
 function TaskFilter({ filter, onChange }) {
@@ -33,11 +32,6 @@ function TaskFilter({ filter, onChange }) {
     )
   })
   return <ul className="filters">{buttons}</ul>
-}
-
-TaskFilter.propTypes = {
-  filter: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
 }
 
 export default TaskFilter

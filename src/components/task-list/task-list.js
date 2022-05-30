@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import { formatDistanceToNow } from 'date-fns'
 
 import './task-list.css'
@@ -24,21 +23,4 @@ function TaskList({ todos, onDeleted, onToggleDone }) {
   return <ul className="todo-list">{elements}</ul>
 }
 
-TaskList.defaultProps = {
-  onDeleted: () => {},
-  onToggleDone: () => {},
-}
-
-TaskList.propTypes = {
-  todos: PropTypes.arrayOf(
-    PropTypes.shape({
-      description: PropTypes.string,
-      id: PropTypes.number,
-      done: PropTypes.bool,
-      timerСount: PropTypes.number,
-    })
-  ).isRequired,
-  onDeleted: PropTypes.func,
-  onToggleDone: PropTypes.func,
-}
 export default TaskList

@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
 import { format } from 'date-fns'
 import './task-item.css'
@@ -72,24 +71,6 @@ function TaskItem({ done, description, onDeleted, onToggleDone, taskCreate, time
       <button className="icon icon-destroy" onClick={onDeleted} type="button" aria-label="delete element" />
     </li>
   )
-}
-
-TaskItem.defaultProps = {
-  description: 'Не задано',
-  done: false,
-  onToggleDone: () => {},
-  onDeleted: () => {},
-  taskCreate: new Date(),
-  timerСount: 300,
-}
-
-TaskItem.propTypes = {
-  done: PropTypes.bool,
-  description: PropTypes.string,
-  onDeleted: PropTypes.func,
-  onToggleDone: PropTypes.func,
-  taskCreate: PropTypes.string,
-  timerСount: PropTypes.number,
 }
 
 export default TaskItem
