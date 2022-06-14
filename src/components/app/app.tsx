@@ -2,12 +2,13 @@ import React, { useState } from 'react'
 
 import './app.css'
 import NewTaskForm from '../new-task-form'
-import Title from '../title'
+import Title from '../title/title'
 import TaskList from '../task-list'
 import Footer from '../Footer'
+import ItaskList from '../task-list/ItaskList.type'
 
-const createTodoItem = (description, timer) => {
-  const newObj = {
+const createTodoItem = (description: string, timer?: number) => {
+  const newObj: ItaskList = {
     description,
     id: Math.random() * 10000,
     done: false,
@@ -23,7 +24,7 @@ function App() {
   const [dataTask, setDataTask] = useState(taskList)
   const [filter, setFilter] = useState('All')
 
-  const createNewTask = (text, timer) => {
+  const createNewTask = (text: string, timer: number) => {
     const newTask = createTodoItem(text, timer)
     setDataTask((prevdataTask) => {
       const newArr = [newTask, ...prevdataTask]
@@ -31,7 +32,7 @@ function App() {
     })
   }
 
-  const deleteTask = (id) => {
+  const deleteTask = (id: number) => {
     setDataTask((prevdataTask) => {
       const newDataTask = prevdataTask.filter((el) => el.id !== id)
       return newDataTask
@@ -45,7 +46,7 @@ function App() {
     })
   }
 
-  const onToggleDone = (id) => {
+  const onToggleDone = (id: number) => {
     setDataTask((prevdataTask) => {
       const idx = prevdataTask.findIndex((el) => el.id === id)
       const oldItem = prevdataTask[idx]
@@ -65,7 +66,7 @@ function App() {
     return dataTask
   }
 
-  const onFilter = (name) => {
+  const onFilter = (name: string) => {
     setFilter(name)
   }
 
@@ -75,7 +76,7 @@ function App() {
   return (
     <section className="todoapp">
       <header className="header">
-        <Title />
+        <Title title="todos" />
         <NewTaskForm onNewTask={createNewTask} />
       </header>
       <section className="main">

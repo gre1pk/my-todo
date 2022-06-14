@@ -1,7 +1,14 @@
 import './footer.css'
 import TaskFilter from '../task-filter'
 
-function Footer({ doneCount, onClearTask, onFilter, filter }) {
+interface FooterProps {
+  doneCount: number
+  onClearTask: () => void
+  onFilter: (name: string) => void
+  filter: string
+}
+
+function Footer({ doneCount, onClearTask, onFilter, filter }: FooterProps) {
   return (
     <footer className="footer">
       <span className="todo-count">{doneCount} items left</span>

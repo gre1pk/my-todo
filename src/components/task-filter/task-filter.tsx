@@ -1,7 +1,12 @@
 import React from 'react'
 import './task-filter.css'
 
-function TaskFilter({ filter, onChange }) {
+interface TaskFilterProps {
+  filter: string
+  onChange: (el: string) => void
+}
+
+function TaskFilter({ filter, onChange }: TaskFilterProps) {
   const filtersBtn = [
     {
       name: 'All',

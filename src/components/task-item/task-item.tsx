@@ -1,14 +1,23 @@
-import React, { useEffect, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { format } from 'date-fns'
 import './task-item.css'
 
-function TaskItem({ done, description, onDeleted, onToggleDone, taskCreate, timerСount = 0 }) {
+interface TaskItemProps {
+  done: boolean
+  description: string
+  onDeleted: () => void
+  onToggleDone: () => void
+  taskCreate: string
+  timerСount: number
+}
+
+function TaskItem({ done, description, onDeleted, onToggleDone, taskCreate, timerСount = 0 }: TaskItemProps) {
   const [timerValue, setTimerValue] = useState(timerСount)
   const [isActive, setIsActive] = useState(false)
 
   useEffect(() => {
-    const start = new Date()
-    let timerId
+    const start = Date.now()
+    let timerId: NodeJS.Timeout | undefined
 
     if (isActive) {
       timerId = setInterval(() => {
@@ -40,7 +49,7 @@ function TaskItem({ done, description, onDeleted, onToggleDone, taskCreate, time
 
   const timer = format(timerValue * 1000, 'mm:ss')
   const classNames = done ? 'completed' : ''
-  const disbldBtn = done ? 'disabled' : false
+  const disbldBtn = done ? true : false
   const btnTimer = isActive ? (
     <button className="icon icon-pause" type="button" aria-label="timer stop" onClick={onStopTimer} />
   ) : (
