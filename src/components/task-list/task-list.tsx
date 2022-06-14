@@ -1,12 +1,19 @@
-import PropTypes from 'prop-types'
 import { formatDistanceToNow } from 'date-fns'
 
 import './task-list.css'
 import TaskItem from '../task-item'
 
-function TaskList({ todos, onDeleted, onToggleDone }) {
+import ItaskList from './ItaskList.type'
+
+interface TaskListProps {
+  todos: Array<ItaskList>
+  onDeleted: (id: number) => void
+  onToggleDone: (id: number) => void
+}
+
+function TaskList({ todos, onDeleted, onToggleDone }: TaskListProps) {
   const elements = todos.map((el) => {
-    const { id, description, done } = el
+    const { id, description, done, timerСount = 0 } = el
     const taskCreate = formatDistanceToNow(new Date(el.date))
 
     return (
@@ -17,26 +24,11 @@ function TaskList({ todos, onDeleted, onToggleDone }) {
         onDeleted={() => onDeleted(id)}
         onToggleDone={() => onToggleDone(id)}
         taskCreate={taskCreate}
+        timerСount={timerСount}
       />
     )
   })
   return <ul className="todo-list">{elements}</ul>
 }
 
-TaskList.defaultProps = {
-  onDeleted: () => {},
-  onToggleDone: () => {},
-}
-
-TaskList.propTypes = {
-  todos: PropTypes.arrayOf(
-    PropTypes.shape({
-      description: PropTypes.string,
-      id: PropTypes.number,
-      done: PropTypes.bool,
-    })
-  ).isRequired,
-  onDeleted: PropTypes.func,
-  onToggleDone: PropTypes.func,
-}
 export default TaskList
